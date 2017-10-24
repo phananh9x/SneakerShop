@@ -108,7 +108,7 @@
                                         for (Product p : ProductDAO.getListProductByCategoryID(category_id)) {
                                     %>
                                     <li>
-                                        <div class="item col-md-3 col-sm-6 col-xs-6">
+                                        <div  class="item col-md-3 col-sm-6 col-xs-6">
                                             <div class="product-block ">
                                                 <div class="image"> <a href="product-detail.jsp?id=<%= p.getProductID() %>"><img class="img-responsive" title="T-shirt" alt="T-shirt" src="<%=p.getProductImage()%>"></a> </div>
                                                 <div class="product-details">
@@ -119,7 +119,7 @@
                                                     <div class="product-hov">
                                                         <ul>
                                                             <li class="wish"><a href="#"></a></li>
-                                                            <li class="addtocart" id="<%=p.getProductID()%>"><a href="#" >Add to Cart</a> </li>
+                                                            <li class="addtocart" id="<%= p.getProductID() %>" value="<%= p.getProductPrice()%>"><a href="#" >Add to Cart</a> </li>
                                                             <li class="compare"><a href="#"></a></li>
                                                         </ul>
                                                         <div class="review"> <span class="rate"> <i class="fa fa-star rated"></i> <i class="fa fa-star rated"></i> <i class="fa fa-star rated"></i> <i class="fa fa-star rated"></i> <i class="fa fa-star"></i> </span> </div>

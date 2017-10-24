@@ -4,6 +4,7 @@
     Author     : phana
 --%>
 
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="model.Cart"%>
 <%@page import="java.util.Map"%>
 <%@page import="model.Item"%>
@@ -26,7 +27,7 @@
     <body>
         <%
             CategoryDAO categoryDAO = new CategoryDAO();
-
+            DecimalFormat formatter = new DecimalFormat("###,###,###");
             Cart cart = (Cart) session.getAttribute("cart");
             if (cart == null) {
                 cart = new Cart();
@@ -178,17 +179,17 @@
                         <div class="col-md-3 header-right">
                             <div class="cart">
                                 <div class="cart-icon dropdown"></div>
-                                <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="cart.html">My Cart( 2 )<span> $261.20</span></a>
+                                <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle my-cart" href="cart.html"><strong>My Cart( <%=cart.countItem()%> ) </strong> <span class="cart-total" value"<%=cart.total()%>"> <%=formatter.format(cart.total())%> VNĐ</span></a>
                                 <ul class="dropdown-menu pull-right cart-dropdown-menu">
                                     <li>
                                         <table class="table table-striped">
                                             <tbody>
                                                 <%for (Map.Entry<Long, Item> list : cart.getCartItems().entrySet()) {%>
-                                                <tr>
+                                                <tr class="tr-cart <%=list.getValue().getProduct().getProductID()%>">
                                                     <td class="text-center"><a href="product.html"><img class="img-thumbnail" src="<%=list.getValue().getProduct().getProductImage()%>" alt="img"></a></td>
                                                     <td class="text-left"><a href="#"><%=list.getValue().getProduct().getProductName()%></a></td>
-                                                    <td class="text-right quality"><%=list.getValue().getQuantity()%> X <%=list.getValue().getProduct().getProductPrice()%></td>
-                                                    <td class="text-right price-new"><%=list.getValue().getQuantity() * list.getValue().getProduct().getProductPrice()%></td>
+                                                    <td class="text-right quality"><%=list.getValue().getQuantity()%> X <%=formatter.format(list.getValue().getProduct().getProductPrice())%></td>
+                                                    <td class="text-right price-new"><%=formatter.format(list.getValue().getQuantity() * list.getValue().getProduct().getProductPrice())%></td>
                                                     <td class="text-center"><button type="button" title="Remove" class="btn btn-xs remove"><i class="fa fa-times"></i></button></td>
                                                 </tr>
                                                 <%}%>
@@ -202,7 +203,7 @@
                                                 <tbody>
                                                     <tr>
                                                         <td class="text-right"><strong>Total</strong></td>
-                                                        <td class="text-right price-new"><%=cart.total()%> VNĐ</td>
+                                                        <td class="text-right price-new"><%=formatter.format(cart.total())%> VNĐ</td>
                                                     </tr>
                                                 </tbody>
 
