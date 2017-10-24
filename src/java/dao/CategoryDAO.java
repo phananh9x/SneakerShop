@@ -18,6 +18,7 @@ import model.Category;
  * @author phana
  */
 public class CategoryDAO {
+
     public static ArrayList<Category> getListCategory() {
         Connection cons = DBconnect.getConnection();
         String sql = "SELECT * FROM danhmuc";
@@ -25,7 +26,7 @@ public class CategoryDAO {
         try {
             PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            while(rs.next()) {
+            while (rs.next()) {
                 Category category = new Category();
                 category.setCategoryID(rs.getString("id_danhmuc"));
                 category.setCategoryName(rs.getString("ten_danhmuc"));
@@ -37,10 +38,29 @@ public class CategoryDAO {
         }
         return list;
     }
-    
+
+    public Category getCategoryById(String categoryId) {
+        Connection cons = DBconnect.getConnection();
+        String sql = "SELECT * FROM danhmuc where id_danhmuc='" + categoryId + "'";
+        Category category = new Category();
+
+        try {
+            PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()) {
+                category.setCategoryID(rs.getString("id_danhmuc"));
+                category.setCategoryName(rs.getString("ten_danhmuc"));
+            }
+            cons.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return category;
+    }
+
     public static void main(String[] args) {
         CategoryDAO dao = new CategoryDAO();
-        for(Category ds : dao.getListCategory()){
+        for (Category ds : dao.getListCategory()) {
             System.out.println(ds.getCategoryID());
         }
     }

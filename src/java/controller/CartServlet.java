@@ -66,7 +66,7 @@ public class CartServlet extends HttpServlet {
                         cart.insertToCart(idProduct, new Item(product, cart.getCartItems().get(idProduct).getQuantity()));
                         try {
                             /* TODO output your response here.*/
-                            out.println("[{\"quantity\":\""+cart.getCartItems().get(idProduct).getQuantity()+"\",\"total\":\""+cart.getCartItems().get(idProduct).getQuantity()*cart.getCartItems().get(idProduct).getProduct().getProductPrice()+"\",\"id\":\"" + product.getProductID() + "\",\"name\":\"" + product.getProductName() + "\",\"price\":\"" + product.getProductPrice() + "\",\"image\":\"" + product.getProductImage()+ "\",\"totalPrice\":\"" + cart.total()+ "\",\"size\":\"" + cart.countItem()+ "\"}]");
+                            out.println("[{\"quantity\":\"" + cart.getCartItems().get(idProduct).getQuantity() + "\",\"total\":\"" + cart.getCartItems().get(idProduct).getQuantity() * cart.getCartItems().get(idProduct).getProduct().getProductPrice() + "\",\"id\":\"" + product.getProductID() + "\",\"name\":\"" + product.getProductName() + "\",\"price\":\"" + product.getProductPrice() + "\",\"image\":\"" + product.getProductImage() + "\",\"totalPrice\":\"" + cart.total() + "\",\"size\":\"" + cart.countItem() + "\"}]");
                         } finally {
                             out.close();
                         }
@@ -74,7 +74,7 @@ public class CartServlet extends HttpServlet {
                         cart.insertToCart(idProduct, new Item(product, 1));
                         try {
                             /* TODO output your response here.*/
-                            out.println("[{\"id\":\"" + product.getProductID()+ "\",\"name\":\"" + product.getProductName() + "\",\"price\":\"" + product.getProductPrice() + "\",\"image\":\"" + product.getProductImage()+ "\",\"totalPrice\":\"" + cart.total()+ "\",\"size\":\"" + cart.countItem()+"\"}]");
+                            out.println("[{\"id\":\"" + product.getProductID() + "\",\"name\":\"" + product.getProductName() + "\",\"price\":\"" + product.getProductPrice() + "\",\"image\":\"" + product.getProductImage() + "\",\"totalPrice\":\"" + cart.total() + "\",\"size\":\"" + cart.countItem() + "\"}]");
                         } finally {
                             out.close();
                         }

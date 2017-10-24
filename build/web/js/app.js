@@ -6,7 +6,7 @@
 
 
 $(document).ready(function () {
-    $('.addtocart').click(function ()
+    $(".addtocart").click(function ()
     {
         var that = this;
         $.ajax({
@@ -24,18 +24,42 @@ $(document).ready(function () {
                     <td class="text-center"><button type="button" title="Remove" class="btn btn-xs remove"><i class="fa fa-times"></i></button></td>
                 </tr>`;
                     $(".table.table-striped").append(string);
-
+                    $(".btn.btn-xs.remove").click(function () {
+                        var that = this;
+                        var id = $(that).parent().parent().attr("class").split(" ")[1];
+                        $.ajax({
+                            type: "post",
+                            url: "CartServlet", //this is my servlet
+                            data: "command=remove&id=" + id,
+                            success: function (data) {
+                                window.location.href = window.location.href;
+                            }
+                        });
+                    });
                 } else {
-                    $(`.tr-cart.${product.id}`).find(".quality").text(`${product.quantity}`+ X+ FormatNumber(`${product.price}`));
+                    $(`.tr-cart.${product.id}`).find(".quality").text(`${product.quantity}` + ` X ` + FormatNumber(`${product.price}`));
                     $(`.tr-cart.${product.id}`).find(".price-new").text(FormatNumber(`${product.total}`));
                 }
                 $(".my-cart strong").text(`My cart(${product.size})`);
-                $(".cart-total").text(FormatNumber(`${product.totalPrice}`)+ ` VNĐ`);
+                $(".cart-total").text(FormatNumber(`${product.totalPrice}`) + ` VNĐ`);
                 $(".pricetotal .price-new").text(FormatNumber(`${product.totalPrice} VNĐ`));
             }
         });
     });
 
+
+    $(".btn.btn-xs.remove").click(function () {
+        var that = this;
+        var id = $(that).parent().parent().attr("class").split(" ")[1];
+        $.ajax({
+            type: "post",
+            url: "CartServlet", //this is my servlet
+            data: "command=remove&id=" + id,
+            success: function (data) {
+                window.location.href = window.location.href;
+            }
+        });
+    });
     function FormatNumber(str) {
         var strTemp = GetNumber(str);
         if (strTemp.length <= 3)

@@ -4,9 +4,25 @@
         <servlet-name>CartServlet</servlet-name>
         <servlet-class>controller.CartServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CheckEmailServlet</servlet-name>
+        <servlet-class>controller.CheckEmailServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UsersServlet</servlet-name>
+        <servlet-class>controller.UsersServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CartServlet</servlet-name>
         <url-pattern>/CartServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckEmailServlet</servlet-name>
+        <url-pattern>/CheckEmailServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UsersServlet</servlet-name>
+        <url-pattern>/UsersServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

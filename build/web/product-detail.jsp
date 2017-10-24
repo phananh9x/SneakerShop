@@ -32,7 +32,7 @@
             <!-- bredcrumb and page title block start  -->
             <section id="bread-crumb">
                 <div class="container">
-                    <div class="row">
+<!--                    <div class="row">
                         <div class="col-md-3 col-sm-3 col-xs-3">
                             <div class="page-title">
                                 <h4>Woman</h4>
@@ -47,7 +47,7 @@
                                 </ul>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </section>
             <!-- bredcrumb and page title block end  -->
@@ -90,10 +90,8 @@
                                     </div>
                                     <label style="width: 100px;">Số lượng: </label>
                                     <input type="text" value="3" style="width: 100px;">
-                                    <button type="button" class="btn btn-fefault cart">
-                                        <a href="CartServlet?command=plus&id=<%=p.getProductID()%>"><i class="fa fa-shopping-cart"></i>
+                                    <a class="addtocart" id="<%=p.getProductID()%>" style="cursor:pointer;"><i class="fa fa-shopping-cart"></i>
                                             Add to cart</a>
-                                    </button>
                                     <a href=""><img src="images/product-details/share.png" class="share img-responsive" alt=""></a>
                                 </div><!--/product-information-->
                             </div>

@@ -4,6 +4,7 @@
     Author     : phana
 --%>
 
+<%@page import="model.Users"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="model.Cart"%>
 <%@page import="java.util.Map"%>
@@ -33,6 +34,10 @@
                 cart = new Cart();
                 session.setAttribute("cart", cart);
             }
+            Users users = null;
+            if (session.getAttribute("user") != null) {
+                users = (Users) session.getAttribute("user");
+            }
 
         %>
         <div class="header">
@@ -44,6 +49,11 @@
                     <div class="user-info pull-right">
                         <div class="user">
                             <ul>
+                                <%if (users != null) {%>
+                                <li><a href="#"><%=users.getUserEmail()%></a></li> 
+                                <li><a href="admin.jsp">Admin Manager</a></li> 
+                                <li><a href="UsersServlet?command=logout">Log Out</a></li> 
+                                <%}else {%>
                                 <li><a href="#" data-toggle="modal" data-target="#login">Login</a> 
                                     <!-- Modal -->
                                     <div class="modal fade" id="login" role="dialog">
@@ -59,12 +69,14 @@
                                                     </div>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form id="loginform" class="form-horizontal">
+                                                    <form id="loginform" class="form-horizontal" action="UsersServlet" method="POST">
                                                         <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                                            <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="username or email">
+                                                            <input id="username" type="text" class="form-control" name="username" value="" placeholder="username or email">
+
+
                                                         </div>
                                                         <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                                            <input id="login-password" type="password" class="form-control" name="password" placeholder="password">
+                                                            <input id="password" type="password" class="form-control" name="password" placeholder="password">
                                                         </div>
                                                         <div class="input-group">
                                                             <div class="checkbox">
@@ -75,7 +87,8 @@
                                                         </div>
                                                         <div class="form-group"> 
                                                             <!-- Button -->
-                                                            <div class="col-sm-12 controls"> <a id="btn-login" href="#" class="btn btn-primary btn-success">Login</a> <a id="btn-fblogin" href="#" class="btn btn-primary facebook">Login with</a> </div>
+                                                            <input type="hidden" name="command" value="login">
+                                                            <button class="btn btn-success">login</button>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -103,50 +116,37 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="modal-body">
-                                                    <div class="control-group"> 
-                                                        <!-- Username -->
-                                                        <label class="control-label"  for="username">Username</label>
-                                                        <div class="controls">
-                                                            <input type="text" id="username" name="username" placeholder="" class="input-xlarge">
-                                                            <p class="help-block">Username can contain any letters or numbers, without spaces</p>
+                                                <form method="POST" action="UsersServlet">
+                                                    <div class="modal-body">
+                                                        <div class="control-group"> 
+                                                            <!-- Username -->
+                                                            <label class="control-label"  for="username">Username</label>
+                                                            <div class="controls">
+                                                                <input type="text" id="username" name="username" placeholder="" class="input-xlarge"><span id="user-result"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="control-group"> 
+                                                            <!-- Password-->
+                                                            <label class="control-label" for="password">Password</label>
+                                                            <div class="controls">
+                                                                <input type="password" id="password" name="password" placeholder="" class="input-xlarge">
+                                                            </div>
+                                                        </div>
+                                                        <div class="control-group"> 
+                                                            <!-- Button -->
+                                                            <div class="controls">
+                                                                <input type="hidden" name="command" value="insert">
+                                                                <button class="btn btn-success">Register</button>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="control-group"> 
-                                                        <!-- E-mail -->
-                                                        <label class="control-label" for="email">E-mail</label>
-                                                        <div class="controls">
-                                                            <input type="text" id="email" name="email" placeholder="" class="input-xlarge">
-                                                            <p class="help-block">Please provide your E-mail</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="control-group"> 
-                                                        <!-- Password-->
-                                                        <label class="control-label" for="password">Password</label>
-                                                        <div class="controls">
-                                                            <input type="password" id="password" name="password" placeholder="" class="input-xlarge">
-                                                            <p class="help-block">Password should be at least 4 characters</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="control-group"> 
-                                                        <!-- Password -->
-                                                        <label class="control-label"  for="password_confirm">Password (Confirm)</label>
-                                                        <div class="controls">
-                                                            <input type="password" id="password_confirm" name="password_confirm" placeholder="" class="input-xlarge">
-                                                            <p class="help-block">Please confirm password</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="control-group"> 
-                                                        <!-- Button -->
-                                                        <div class="controls">
-                                                            <button class="btn btn-success">Register</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                </form>
+
                                             </div>
                                         </div>
                                     </div>
                                 </li>
+                                <%}%>
                             </ul>
                         </div>
                     </div>
@@ -190,7 +190,7 @@
                                                     <td class="text-left"><a href="#"><%=list.getValue().getProduct().getProductName()%></a></td>
                                                     <td class="text-right quality"><%=list.getValue().getQuantity()%> X <%=formatter.format(list.getValue().getProduct().getProductPrice())%></td>
                                                     <td class="text-right price-new"><%=formatter.format(list.getValue().getQuantity() * list.getValue().getProduct().getProductPrice())%></td>
-                                                    <td class="text-center"><button type="button" title="Remove" class="btn btn-xs remove"><i class="fa fa-times"></i></button></td>
+                                                    <td class="text-center"><button type="button" title="Remove" class="btn btn-xs remove" onclick="removeProduct()"><i class="fa fa-times"></i></button></td>
                                                 </tr>
                                                 <%}%>
                                             </tbody>
