@@ -110,7 +110,7 @@
                                     <li>
                                         <div  class="item col-md-3 col-sm-6 col-xs-6">
                                             <div class="product-block ">
-                                                <div class="image"> <a href="product-detail.jsp?id=<%= p.getProductID()%>"><img class="img-responsive" title="T-shirt" alt="T-shirt" src="<%=p.getProductImage()%>"></a> </div>
+                                                <div class="image"> <a href="product-detail.jsp?id=<%= p.getProductID()%>"><img class="img-responsive" title="T-shirt" alt="T-shirt" src="images/product/<%=p.getProductImage()%>"></a> </div>
                                                 <div class="product-details">
                                                     <div class="product-name">
                                                         <h4><a href="product-detail.jsp?id=<%= p.getProductID()%>"><%=p.getProductName()%></a></h4>

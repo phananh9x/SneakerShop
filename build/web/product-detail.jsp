@@ -62,7 +62,7 @@
                             <div class="product-details"><!--product-details-->
                                 <div class="col-sm-5">
                                     <div class="view-product">
-                                        <img src="<%=p.productImage%>" alt="">
+                                        <img src="images/product/<%=p.productImage%>" alt="">
                                     <h3>ZOOM</h3>
                                 </div>
 
