@@ -188,8 +188,8 @@
                                             <tbody>
                                                 <%for (Map.Entry<Long, Item> list : cart.getCartItems().entrySet()) {%>
                                                 <tr class="tr-cart <%=list.getValue().getProduct().getProductID()%>">
-                                                    <td class="text-center"><a href="product.html"><img class="img-thumbnail" src="<%=list.getValue().getProduct().getProductImage()%>" alt="img"></a></td>
-                                                    <td class="text-left"><a href="#"><%=list.getValue().getProduct().getProductName()%></a></td>
+                                                    <td class="text-center"><a href="product-detail.jsp?id=<%=list.getValue().getProduct().getProductID()%>"><img class="img-thumbnail" src="images/product/<%=list.getValue().getProduct().getProductImage()%>" alt="img"></a></td>
+                                                    <td class="text-left"><a href="product-detail.jsp?id=<%=list.getValue().getProduct().getProductID()%>"><%=list.getValue().getProduct().getProductName()%></a></td>
                                                     <td class="text-right quality"><%=list.getValue().getQuantity()%> X <%=formatter.format(list.getValue().getProduct().getProductPrice())%></td>
                                                     <td class="text-right price-new"><%=formatter.format(list.getValue().getQuantity() * list.getValue().getProduct().getProductPrice())%></td>
                                                     <td class="text-center"><button type="button" title="Remove" class="btn btn-xs remove" onclick="removeProduct()"><i class="fa fa-times"></i></button></td>
@@ -210,7 +210,7 @@
                                                 </tbody>
 
                                             </table>
-                                            <div class="controls"> <a class="btn btn-primary pull-left" href="cart.html" id="view-cart"><i class="fa fa-shopping-cart"></i> View Cart </a> <a class="btn btn-primary pull-right" href="checkout.html" id="checkout"><i class="fa fa-share"></i> Checkout</a> </div>
+                                            <div class="controls"> <a class="btn btn-primary pull-left" href="checkout.jsp" id="view-cart"><i class="fa fa-shopping-cart"></i> View Cart </a> <a class="btn btn-primary pull-right" href="checkout.jsp" id="checkout"><i class="fa fa-share"></i> Checkout</a> </div>
                                         </div>
                                     </li>
                                 </ul>

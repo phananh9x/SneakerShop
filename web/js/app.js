@@ -6,6 +6,49 @@
 
 
 $(document).ready(function () {
+    $("#form-sp").click(function (e) {
+        var sampleText = document.getElementById("imagesp").files[0].name;
+        var sampleFile = document.getElementById("imagesp").files[0];
+
+        var formdata = new FormData();
+        formdata.append("sampleText", sampleText);
+        formdata.append("sampleFile", sampleFile);
+        $.ajax({
+            type: "post",
+            url: "../UploadFileServlet", //this is my servlet
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: formdata,
+            success: function (hinh) {
+                var name = $("#tensp").val();
+                var gia = $("#giasp").val();
+                var danhmuc = $("#danhmuc").val();
+                $.ajax({
+                    type: "post",
+                    url: "../ProductServlet", //this is my servlet
+                    data: "command=insert&name=" + name + "&price=" + gia + "&categoryid=" + danhmuc + "&image=" + hinh,
+                    success: function () {
+                        window.location.href = window.origin + "/SneakerShop/admin/index.jsp";
+                    }
+                })
+            }
+        });
+    });
+
+    $("#xoa-sp").click(function (e) {
+        var ma = $("#masp").val();
+        $.ajax({
+            type: "post",
+            url: "../ProductServlet", //this is my servlet
+            data: "command=delete&id=" + ma,
+            success: function () {
+                window.location.href = window.origin + "/SneakerShop/admin/index.jsp";
+            }
+        })
+    });
+
+
     $(".addtocart").click(function ()
     {
         var that = this;
@@ -17,7 +60,7 @@ $(document).ready(function () {
                 var product = JSON.parse(data)[0];
                 if (!product.quantity) {
                     var string = `<tr class="tr-cart ${product.id}">
-                    <td class="text-center"><a href="product.html"><img class="img-thumbnail" src="${product.image}" alt="img"></a></td>
+                    <td class="text-center"><a href="product.html"><img class="img-thumbnail" src="images/product/${product.image}" alt="img"></a></td>
                     <td class="text-left"><a href="#">${product.name}</a></td>
                     <td class="text-right quality">1 X ${FormatNumber(product.price)}</td>
                     <td class="text-right price-new">${FormatNumber(product.price)}</td>
@@ -46,7 +89,6 @@ $(document).ready(function () {
             }
         });
     });
-
 
     $(".btn.btn-xs.remove").click(function () {
         var that = this;
@@ -125,4 +167,8 @@ $(document).ready(function () {
         }
         return str;
     }
+
+
+
+
 });

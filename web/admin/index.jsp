@@ -56,7 +56,8 @@
                                                     </tr>
                                                 </tfoot>
                                                 <tbody>
-                                                    <%                      DecimalFormat formatter = new DecimalFormat("###,###,###");
+                                                        <%                      
+                                                            DecimalFormat formatter = new DecimalFormat("###,###,###");
                                                         for (Product p : productDAO.getAllProduct()) {
                                                     %>
                                                     <tr>

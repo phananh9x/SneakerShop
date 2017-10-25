@@ -36,6 +36,10 @@
                             <i class="fa fa-fw fa-table"></i>
                             <span class="nav-link-text">Thêm Sản Phẩm</span>
                         </a>
+                        <a class="nav-link" href="deleteproduct.jsp">
+                            <i class="fa fa-fw fa-table"></i>
+                            <span class="nav-link-text">Xóa Sản Phẩm</span>
+                        </a>
                     </li>
 
 

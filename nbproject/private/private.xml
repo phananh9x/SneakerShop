@@ -3,10 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/phana/SneakerShop/web/header.jsp</file>
-            <file>file:/C:/Users/phana/SneakerShop/src/java/dao/CategoryDAO.java</file>
-            <file>file:/C:/Users/phana/SneakerShop/web/product.jsp</file>
-            <file>file:/C:/Users/phana/SneakerShop/web/product-detail.jsp</file>
+            <file>file:/C:/Users/phana/SneakerShop/web/admin/index.jsp</file>
+            <file>file:/C:/Users/phana/SneakerShop/src/java/controller/FileUpload.java</file>
+            <file>file:/C:/Users/phana/SneakerShop/web/admin/addproduct.jsp</file>
+            <file>file:/C:/Users/phana/SneakerShop/web/admin/footerAdmin.jsp</file>
+            <file>file:/C:/Users/phana/SneakerShop/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/phana/SneakerShop/web/js/app.js</file>
         </group>
     </open-files>
 </project-private>

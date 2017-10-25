@@ -11,7 +11,10 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Product;
+import model.Users;
 
 /**
  *
@@ -28,7 +31,7 @@ public class ProductDAO {
         while (rs.next()) {
             Product pr = new Product();
             pr.setCategoryID(rs.getString("id_danhmuc"));
-            pr.setProductID(rs.getInt("id"));
+            pr.setProductID(rs.getLong("id"));
             pr.setProductName(rs.getString("ten"));
             pr.setProductImage(rs.getString("hinh"));
             pr.setProductPrice(rs.getInt("gia"));
@@ -36,6 +39,7 @@ public class ProductDAO {
         }
         return list;
     }
+
     public static ArrayList<Product> getListProductByCategoryID(String categoryId) throws SQLException {
         Connection cons = DBconnect.getConnection();
         String sql = "SELECT * FROM SANPHAM WHERE id_danhmuc ='" + categoryId + "'";
@@ -53,6 +57,7 @@ public class ProductDAO {
         }
         return list;
     }
+
     public Product getProduct(long productID) throws SQLException {
         Connection connection = DBconnect.getConnection();
         String sql = "SELECT * FROM SANPHAM WHERE id = '" + productID + "'";
@@ -68,9 +73,9 @@ public class ProductDAO {
         }
         return product;
     }
-    
-     // lấy danh sách sản phẩm
-    public ArrayList<Product> getListProductByNav(String categoryID, int firstResult, int maxResult) throws SQLException{
+
+    // lấy danh sách sản phẩm
+    public ArrayList<Product> getListProductByNav(String categoryID, int firstResult, int maxResult) throws SQLException {
         Connection connection = DBconnect.getConnection();
         String sql = "SELECT * FROM sanpham WHERE id_danhmuc = '" + categoryID + "' limit ?,?";
         PreparedStatement ps = (PreparedStatement) connection.prepareCall(sql);
@@ -89,8 +94,9 @@ public class ProductDAO {
         }
         return list;
     }
+
     // tính tổng sản phẩm
-    public int countProductByCategory(String categoryID) throws SQLException{
+    public int countProductByCategory(String categoryID) throws SQLException {
         Connection connection = DBconnect.getConnection();
         String sql = "SELECT count(id) FROM sanpham WHERE id_danhmuc = '" + categoryID + "'";
         PreparedStatement ps = (PreparedStatement) connection.prepareCall(sql);
@@ -99,8 +105,44 @@ public class ProductDAO {
         while (rs.next()) {
             count = rs.getInt(1);
         }
-        return count;  
+        return count;
     }
+
+    public boolean insertProduct(Product u) {
+        Connection connection = DBconnect.getConnection();
+        String sql = "INSERT INTO sanpham VALUES (?,?,?,?,?)";
+        try {
+            java.sql.PreparedStatement ps = connection.prepareCall(sql);
+            ps.setLong(1, u.getProductID());
+            ps.setString(2, u.getProductName());
+            ps.setString(3, u.getProductImage());
+            ps.setString(4, u.getCategoryID());
+            ps.setInt(5, u.getProductPrice());
+
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(UsersDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    public boolean deleteProduct(Long i) {
+        Connection connection = DBconnect.getConnection();
+        String sql = "DELETE FROM sanpham WHERE id = ? ";
+        PreparedStatement ps;
+        try {
+            ps = (PreparedStatement) connection.prepareCall(sql);
+            ps.setLong(1, i);
+            ps.executeUpdate();
+            return true;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
     public static void main(String[] args) throws SQLException {
         ProductDAO dao = new ProductDAO();
         for (Product p : dao.getListProductByCategoryID("adidas")) {
