@@ -19,6 +19,23 @@ import model.Product;
  */
 public class ProductDAO {
 
+    public static ArrayList<Product> getAllProduct() throws SQLException {
+        Connection cons = DBconnect.getConnection();
+        String sql = "SELECT * FROM SANPHAM";
+        ArrayList<Product> list = new ArrayList<>();
+        PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            Product pr = new Product();
+            pr.setCategoryID(rs.getString("id_danhmuc"));
+            pr.setProductID(rs.getInt("id"));
+            pr.setProductName(rs.getString("ten"));
+            pr.setProductImage(rs.getString("hinh"));
+            pr.setProductPrice(rs.getInt("gia"));
+            list.add(pr);
+        }
+        return list;
+    }
     public static ArrayList<Product> getListProductByCategoryID(String categoryId) throws SQLException {
         Connection cons = DBconnect.getConnection();
         String sql = "SELECT * FROM SANPHAM WHERE id_danhmuc ='" + categoryId + "'";

@@ -122,7 +122,8 @@
                                 <div class="product-grid-view">
 
                                     <ul>
-                                    <%                                        DecimalFormat formatter = new DecimalFormat("###,###,###");
+                                    <%                                        
+                                        DecimalFormat formatter = new DecimalFormat("###,###,###");
                                         for (Product p : listProduct) {
                                     %>
                                     <li>
