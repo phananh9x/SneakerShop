@@ -51,7 +51,7 @@
                             <ul>
                                 <%if (users != null) {%>
                                 <li><a href="#"><%=users.getUserEmail()%></a></li> 
-                                <li><a href="admin.jsp">Admin Manager</a></li> 
+                                <li><a href="admin/index.jsp">Admin Manager</a></li> 
                                 <li><a href="UsersServlet?command=logout">Log Out</a></li> 
                                 <%}else {%>
                                 <li><a href="#" data-toggle="modal" data-target="#login">Login</a> 
@@ -87,8 +87,10 @@
                                                         </div>
                                                         <div class="form-group"> 
                                                             <!-- Button -->
-                                                            <input type="hidden" name="command" value="login">
-                                                            <button class="btn btn-success">login</button>
+                                                            <div class="col-sm-12 controls"> 
+                                                                <input type="hidden" name="command" value="login">
+                                                                <button class="btn btn-primary btn-success">login</button>
+                                                            </div>
                                                         </div>
                                                     </form>
                                                 </div>
