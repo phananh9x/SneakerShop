@@ -250,7 +250,7 @@
                                 <%
                                     for (Category c : categoryDAO.getListCategory()) {
                                 %>
-                            <li><a href="product.jsp?category=<%=c.getCategoryID()%>"><%= c.getCategoryName().toUpperCase()%></a></li>
+                            <li><a href="product.jsp?category=<%=c.getCategoryID()%>&pages=1"><%= c.getCategoryName().toUpperCase()%></a></li>
                                 <% }%>
                             <li><a href="about-us.html">LIÊN HỆ</a></li>
                         </ul>

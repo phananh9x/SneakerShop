@@ -51,7 +51,39 @@ public class ProductDAO {
         }
         return product;
     }
-
+    
+     // lấy danh sách sản phẩm
+    public ArrayList<Product> getListProductByNav(String categoryID, int firstResult, int maxResult) throws SQLException{
+        Connection connection = DBconnect.getConnection();
+        String sql = "SELECT * FROM sanpham WHERE id_danhmuc = '" + categoryID + "' limit ?,?";
+        PreparedStatement ps = (PreparedStatement) connection.prepareCall(sql);
+        ps.setInt(1, firstResult);
+        ps.setInt(2, maxResult);
+        ResultSet rs = ps.executeQuery();
+        ArrayList<Product> list = new ArrayList<>();
+        while (rs.next()) {
+            Product product = new Product();
+            product.setProductID(rs.getLong("id"));
+            product.setProductName(rs.getString("ten"));
+            product.setProductImage(rs.getString("hinh"));
+            product.setProductPrice(rs.getInt("gia"));
+            product.setCategoryID(rs.getString("id_danhmuc"));
+            list.add(product);
+        }
+        return list;
+    }
+    // tính tổng sản phẩm
+    public int countProductByCategory(String categoryID) throws SQLException{
+        Connection connection = DBconnect.getConnection();
+        String sql = "SELECT count(id) FROM sanpham WHERE id_danhmuc = '" + categoryID + "'";
+        PreparedStatement ps = (PreparedStatement) connection.prepareCall(sql);
+        ResultSet rs = ps.executeQuery();
+        int count = 0;
+        while (rs.next()) {
+            count = rs.getInt(1);
+        }
+        return count;  
+    }
     public static void main(String[] args) throws SQLException {
         ProductDAO dao = new ProductDAO();
         for (Product p : dao.getListProductByCategoryID("adidas")) {

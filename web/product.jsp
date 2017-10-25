@@ -4,6 +4,7 @@
     Author     : phana
 --%>
 
+<%@page import="java.util.ArrayList"%>
 <%@page import="model.Cart"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="dao.ProductDAO"%>
@@ -26,6 +27,23 @@
                 cart = new Cart();
                 session.setAttribute("cart", cart);
             }
+            ProductDAO productDAO = new ProductDAO();
+            int pages = 0, firstResult = 0, maxResult = 0, total = 0;
+            if (request.getParameter("pages") != null) {
+                pages = (int) Integer.parseInt(request.getParameter("pages"));
+            }
+
+            total = productDAO.countProductByCategory(category_id);
+            if (total <= 16) {
+                firstResult = 1;
+                maxResult = total;
+            } else {
+                firstResult = (pages - 1) * 16;
+                maxResult = 16;
+            }
+
+            ArrayList<Product> listProduct = productDAO.getListProductByNav(
+                    category_id, firstResult, maxResult);
 
         %>
         <jsp:include page="header.jsp"></jsp:include>
@@ -37,75 +55,75 @@
                         <div class="col-md-3 col-sm-3 col-xs-3">
                             <div class="page-title">
                                 <h4></h4>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-9 col-sm-9 col-xs-9">
-                        <div class="bread-crumb">
-                            <ul>
-                                <li><a href="index.jsp">home</a></li>
-                                <li>\</li>
-                                <li><a href="product.jsp?category="></a></li>
-                            </ul>
+                        <div class="col-md-9 col-sm-9 col-xs-9">
+                            <div class="bread-crumb">
+                                <ul>
+                                    <li><a href="index.jsp">home</a></li>
+                                    <li>\</li>
+                                    <li><a href="product.jsp?category="></a></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-        <!-- bredcrumb and page title block end  -->
+            </section>
+            <!-- bredcrumb and page title block end  -->
 
-        <section id="product-category">
-            <div class="container">
-                <div class="row">
+            <section id="product-category">
+                <div class="container">
+                    <div class="row">
 
-                    <div class=""> 
-                        <!-- right block Start  -->
-                        <section id="right">
-                            <!--<div class="category-banner"> <a href="#"><img src="images/product/Category-banner.jpg" alt="#"></a> </div>-->
-                            <!--                                <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <div class="view">
-                                                                        <div class="grid active "><a href="grid-view.html">
-                                                                                <div class="grid-icon "></div>
-                                                                            </a> </div>
-                                                                        <div class="list"><a href="list-view.html">
-                                                                                <div class="list-icon "></div>
-                                                                            </a> </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <div class="shoring pull-right">
-                                                                        <div class="short-by">
-                                                                            <p>Sort By</p>
-                                                                            <div class="select-item">
-                                                                                <select>
-                                                                                    <option value="" selected="selected">Name (A to Z)</option>
-                                                                                    <option value="">Name(Z - A)</option>
-                                                                                    <option value="">price(low&gt;high)</option>
-                                                                                    <option value="">price(high &gt; low)</option>
-                                                                                    <option value="">rating(highest)</option>
-                                                                                    <option value="">rating(lowest)</option>
-                                                                                </select>
-                                                                                <span class="fa fa-angle-down"></span> </div>
-                                                                        </div>
-                                                                        <div class="show-item">
-                                                                            <p>Show</p>
-                                                                            <div class="select-item">
-                                                                                <select>
-                                                                                    <option value="" selected="selected">24</option>
-                                                                                    <option value="">12</option>
-                                                                                    <option value="">6</option>
-                                                                                </select>
-                                                                                <span class="fa fa-angle-down"></span> </div>
+                        <div class=""> 
+                            <!-- right block Start  -->
+                            <section id="right">
+                                <!--<div class="category-banner"> <a href="#"><img src="images/product/Category-banner.jpg" alt="#"></a> </div>-->
+                                <!--                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <div class="view">
+                                                                            <div class="grid active "><a href="grid-view.html">
+                                                                                    <div class="grid-icon "></div>
+                                                                                </a> </div>
+                                                                            <div class="list"><a href="list-view.html">
+                                                                                    <div class="list-icon "></div>
+                                                                                </a> </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
-                                                            </div>-->
+                                                                    <div class="col-md-6">
+                                                                        <div class="shoring pull-right">
+                                                                            <div class="short-by">
+                                                                                <p>Sort By</p>
+                                                                                <div class="select-item">
+                                                                                    <select>
+                                                                                        <option value="" selected="selected">Name (A to Z)</option>
+                                                                                        <option value="">Name(Z - A)</option>
+                                                                                        <option value="">price(low&gt;high)</option>
+                                                                                        <option value="">price(high &gt; low)</option>
+                                                                                        <option value="">rating(highest)</option>
+                                                                                        <option value="">rating(lowest)</option>
+                                                                                    </select>
+                                                                                    <span class="fa fa-angle-down"></span> </div>
+                                                                            </div>
+                                                                            <div class="show-item">
+                                                                                <p>Show</p>
+                                                                                <div class="select-item">
+                                                                                    <select>
+                                                                                        <option value="" selected="selected">24</option>
+                                                                                        <option value="">12</option>
+                                                                                        <option value="">6</option>
+                                                                                    </select>
+                                                                                    <span class="fa fa-angle-down"></span> </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>-->
 
-                            <div class="product-grid-view">
+                                <div class="product-grid-view">
 
-                                <ul>
+                                    <ul>
                                     <%                                        DecimalFormat formatter = new DecimalFormat("###,###,###");
-                                        for (Product p : ProductDAO.getListProductByCategoryID(category_id)) {
+                                        for (Product p : listProduct) {
                                     %>
                                     <li>
                                         <div  class="item col-md-3 col-sm-6 col-xs-6">
@@ -137,11 +155,14 @@
                         <div class="row">
                             <div class="pagination-bar">
                                 <ul>
-                                    <li><a href="#"><i class="fa fa-angle-left"></i></a></li>
-                                    <li class="active"><a href="#">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                                    <li><a href="product.jsp?category=<%=category_id%>&pages=<%=pages - 1%>"><i class="fa fa-angle-left"></i></a></li>
+                                            <%for (int i = 1; i <= (total / 16) + 1; i++) {%>
+                                            <%if (i == pages) {%>
+                                    <li class="active"><a href="product.jsp?category=<%=category_id%>&pages=<%=i%>"><%=i%></a></li>
+                                        <%} else {%>
+                                    <li><a href="product.jsp?category=<%=category_id%>&pages=<%=i%>"><%=i%></a></li>
+                                        <%}}%>
+                                    <li><a href="product.jsp?category=<%=category_id%>&pages=<%=pages + 1%>"><i class="fa fa-angle-right"></i></a></li>
                                 </ul>
                             </div>
                         </div>
