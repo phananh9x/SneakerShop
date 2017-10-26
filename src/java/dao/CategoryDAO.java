@@ -11,7 +11,10 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Category;
+import model.Product;
 
 /**
  *
@@ -56,6 +59,22 @@ public class CategoryDAO {
             e.printStackTrace();
         }
         return category;
+    }
+
+     public boolean insertCategory(Category c) {
+        Connection connection = DBconnect.getConnection();
+        String sql = "INSERT INTO danhmuc VALUES (?,?,?)";
+        try {
+            java.sql.PreparedStatement ps = connection.prepareCall(sql);
+            ps.setLong(1, new java.util.Date().getTime());
+            ps.setString(2, c.getCategoryID());
+            ps.setString(3, c.getCategoryName());
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(UsersDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
 
     public static void main(String[] args) {

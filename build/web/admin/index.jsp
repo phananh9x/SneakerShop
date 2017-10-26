@@ -25,61 +25,67 @@
                             <a href="#">Dashboard</a>
                         </li>
                         <li class="breadcrumb-item active"><a href="index.jsp">Danh sách sản phẩm</a></li>
-                     </ol>
-                                    <!-- Example DataTables Card-->
-                                    <div class="card mb-3">
-                                        <div class="card-header">
-                                            <i class="fa fa-table"></i> Danh sách sản phẩm</div>
-                                        <div class="card-body">
-                                        <%
-                                            ProductDAO productDAO = new ProductDAO();
+                    </ol>
+                    <!-- Example DataTables Card-->
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <i class="fa fa-table"></i> Danh sách sản phẩm</div>
+                        <div class="card-body">
+                        <%
+                            ProductDAO productDAO = new ProductDAO();
 
-                                        %>
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                                <thead>
-                                                    <tr>
-                                                        <th>ID</th>
-                                                        <th>Tên Sản Phẩm</th>
-                                                        <th>Giá</th>
-                                                        <th>Danh mục</th>
-                                                        <th>hình</th>
-                                                    </tr>
-                                                </thead>
-                                                <tfoot>
-                                                    <tr>
-                                                        <th>ID</th>
-                                                        <th>Tên Sản Phẩm</th>
-                                                        <th>Giá</th>
-                                                        <th>Danh mục</th>
-                                                        <th>Hình</th>
-                                                    </tr>
-                                                </tfoot>
-                                                <tbody>
-                                                        <%                      
-                                                            DecimalFormat formatter = new DecimalFormat("###,###,###");
-                                                        for (Product p : productDAO.getAllProduct()) {
-                                                    %>
-                                                    <tr>
-                                                        <td style="line-height: 150px;"><%=p.getProductID()%></td>
-                                                        <td style="line-height: 150px;"><%=p.getProductName()%></td>
-                                                        <td style="line-height: 150px;"><%=formatter.format(p.getProductPrice())%> VNĐ</td>
-                                                        <td style="line-height: 150px;"><%=p.getCategoryID()%></td>
-                                                        <td style="display: flex;justify-content: center;">
-                                                            <img src="../images/product/<%=p.getProductImage()%>" style="height: 150px;">
-                                                        </td>
-                                                    </tr>
-                                                    <%}%>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-                                </div>
-                                </div>
-                                </div>
+                        %>
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Tên Sản Phẩm</th>
+                                        <th>Giá</th>
+                                        <th>Danh mục</th>
+                                        <th>Hình</th>
+                                        <th>Control</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Tên Sản Phẩm</th>
+                                        <th>Giá</th>
+                                        <th>Danh mục</th>
+                                        <th>Hình</th>
+                                        <th>Control</th>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+                                    <%                                                            DecimalFormat formatter = new DecimalFormat("###,###,###");
+                                        for (Product p : productDAO.getAllProduct()) {
+                                    %>
+                                    <tr>
+                                        <td style="line-height: 150px;"><%=p.getProductID()%></td>
+                                        <td style="line-height: 150px;"><%=p.getProductName()%></td>
+                                        <td style="line-height: 150px;"><%=formatter.format(p.getProductPrice())%> VNĐ</td>
+                                        <td style="line-height: 150px;"><%=p.getCategoryID()%></td>
+                                        <td style="display: flex;justify-content: center;">
+                                            <img src="../images/product/<%=p.getProductImage()%>" style="height: 150px;">
+                                        </td>
+                                        <td style="line-height: 150px;">
+                                            <div class="box-footer">
+                                                <button class="btn btn-primary btn-xoa-sp" value="<%=p.getProductID()%>">Xóa </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <%}%>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+                </div>
+            </div>
+        </div>
 
 
-                                <jsp:include page="footerAdmin.jsp"></jsp:include>
+        <jsp:include page="footerAdmin.jsp"></jsp:include>
 
-                                </body></html>
+    </body></html>

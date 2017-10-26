@@ -18,13 +18,13 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class= "newslatter">
-                            <form>
+<!--                            <form>
                                 <h2>Be the first to hear our exciting news</h2>
                                 <div class="input-group">
                                     <input class=" form-control" type="text" placeholder="Email Here......">
                                     <button type="submit" value="Sign up" class="btn btn-large btn-primary">Sign up</button>
                                 </div>
-                            </form>
+                            </form>-->
                         </div>
                     </div>
                 </div>

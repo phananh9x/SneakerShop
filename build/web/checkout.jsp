@@ -71,7 +71,7 @@
                                             </div></td>
                                         <td><%=formatter.format(list.getValue().getProduct().getProductPrice())%></td>
                                         <td class="price"><%=formatter.format(list.getValue().getQuantity() * list.getValue().getProduct().getProductPrice())%></td>
-                                        <td class="delete"><a title="Delete"> <i class="glyphicon glyphicon-trash "></i></a></td>
+                                        <td class="delete"><a title="Delete"> <i class="glyphicon glyphicon-trash " value="<%=list.getValue().getProduct().getProductID()%>"></i></a></td>
                                     </tr>
                                     <%}%>
 
@@ -80,7 +80,7 @@
                         </div>
                         <div class="cart-bottom">
                             <div class="box-footer">
-                                <div class="pull-left"><a class="btn btn-default" href="index.html"> <i class="fa fa-arrow-left"></i> &nbsp; Continue shopping </a></div>
+                                <div class="pull-left"><a class="btn btn-default" href="index.jsp"> <i class="fa fa-arrow-left"></i> &nbsp; Continue shopping </a></div>
                                 <div class="pull-right">
                                     <button class="btn btn-default" type="submit"><i class="fa fa-undo"></i> &nbsp; Update cart</button>
                                 </div>
@@ -100,30 +100,15 @@
                                         <div class="carttable">
                                             <table class="table" id="cart-summary">
                                                 <tbody>
+                                                    
                                                     <tr>
-                                                        <td>Total products</td>
-                                                        <td class="price">$125.05</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Shipping</td>
-                                                        <td class="price"><span class="success">Free shipping!</span></td>
-                                                    </tr>
-                                                    <tr class="cart-total-price ">
-                                                        <td>Total (tax excl.)</td>
-                                                        <td class="price">$125.05</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Total tax</td>
-                                                        <td id="total-tax" class="price">$0.00</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td> Total</td>
-                                                        <td id="total-price">$125.05</td>
+                                                        <td> Tổng Tiền :</td>
+                                                        <td id="total-price"><%=formatter.format(cart.total())%> VNĐ</td>
                                                     </tr>
                                                     <tr>
                                                         <td colspan="2"><div class="input-append couponForm">
                                                                 <input type="text" placeholder="Gift or Coupon code" id="appendedInputButton">
-                                                                <button type="button" class="col-lg-4 btn btn-success">Apply!</button>
+                                                                <button type="button" class="col-lg-4 btn btn-success">Thanh Toán!</button>
                                                             </div></td>
                                                     </tr>
                                                 </tbody>

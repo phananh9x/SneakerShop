@@ -158,25 +158,10 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-3 header-left">
-                            <div class="logo"> <a href="index.html"><img src="images/logo.png" alt="#"></a> </div>
+                            <div class="logo"> <a href="index.jsp"><img src="images/logo.png" alt="#"></a> </div>
                         </div>
                         <div class="col-md-6 search_block">
-                            <div class="search">
-                                <form action="grid-view.html">
-                                    <div class="search_cat">
-                                        <select class="search-category" name="search-category">
-                                            <option class="computer" selected>All Categories</option>
-                                            <option class="computer">Men</option>
-                                            <option class="computer">Women</option>
-                                            <option class="computer">Kids</option>
-                                            <option class="computer">Computer</option>
-                                            <option class="computer">Electronics</option>
-                                        </select>
-                                        <span class="fa fa-angle-down"></span> </div>
-                                    <input type="text" placeholder="Search...">
-                                    <button type="submit" class="btn submit"> <span class="fa fa-search"></span></button>
-                                </form>
-                            </div>
+                           
                         </div>
                         <div class="col-md-3 header-right">
                             <div class="cart">
@@ -221,19 +206,6 @@
             </div>
             <div class="header-bottom">
                 <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="new-further">
-                                <p>New in Further  : </p>
-                                <ul class="toggle-newinFurther">
-                                    <li><a href="#">Women</a></li>
-                                    <li><a href="#">Clothing</a></li>
-                                    <li><a href="#">Nightwear</a></li>
-                                    <li><a href="#">Panties</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

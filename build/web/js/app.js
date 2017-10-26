@@ -36,8 +36,21 @@ $(document).ready(function () {
         });
     });
 
+    $("#form-danhmuc").click(function (e){
+        var id = $("#idDanhMuc").val();
+        var name = $("#tenDanhMuc").val();
+        $.ajax({
+            type: "post",
+            url: "../CategoryServlet", //this is my servlet
+            data: "command=insert&id=" + id + "&name=" + name,
+            success: function () {
+                window.location.href = window.origin + "/SneakerShop/admin/index.jsp";
+            }
+        })
+    })
+
     $("#xoa-sp").click(function (e) {
-        var ma = $("#masp").val();
+        var id = $("#masp").val();
         $.ajax({
             type: "post",
             url: "../ProductServlet", //this is my servlet
@@ -47,6 +60,24 @@ $(document).ready(function () {
             }
         })
     });
+    
+    $(".btn-xoa-sp").click(function (e) {
+        var ma = $(this).attr("value");
+        $.ajax({
+            type: "post",
+            url: "../ProductServlet", //this is my servlet
+            data: "command=delete&id=" + ma,
+            success: function () {
+                window.location.href = window.origin + "/SneakerShop/admin/index.jsp";
+            }
+        })
+    });
+    
+    $(".back-home").click(function (){
+        window.location.href = window.origin + "/SneakerShop/index.jsp";
+    })
+
+    
 
 
     $(".addtocart").click(function ()
@@ -93,6 +124,19 @@ $(document).ready(function () {
     $(".btn.btn-xs.remove").click(function () {
         var that = this;
         var id = $(that).parent().parent().attr("class").split(" ")[1];
+        $.ajax({
+            type: "post",
+            url: "CartServlet", //this is my servlet
+            data: "command=remove&id=" + id,
+            success: function (data) {
+                window.location.href = window.location.href;
+            }
+        });
+    });
+
+    $(".delete i").click(function () {
+        var that = this;
+        var id = $(that).attr("value");
         $.ajax({
             type: "post",
             url: "CartServlet", //this is my servlet

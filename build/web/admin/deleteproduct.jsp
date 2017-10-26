@@ -32,9 +32,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="box-footer">
-                            <button id="xoa-sp" type="submit" class="btn btn-primary" >OK</button>
+                        <div class="col-12">
+                            <div class="form-group row">
+                                <div class="box-footer">
+                                    <button id="xoa-sp" type="submit" class="btn btn-primary" >OK</button>
+                                </div>
+                            </div>
                         </div>
+
                     </div>
                     <!-- /.col -->
                 </div>
@@ -43,6 +48,6 @@
         </div>
 
 
-        <jsp:include page="footerAdmin.jsp"></jsp:include>
-    </body>
+    <jsp:include page="footerAdmin.jsp"></jsp:include>
+</body>
 </html>

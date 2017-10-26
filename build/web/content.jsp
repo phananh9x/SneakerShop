@@ -14,7 +14,7 @@
     <body>
           <!-- Featured Products block Start  -->
     <section id="Featured">
-        <div class="container">
+<!--        <div class="container">
             <div class="row">
                 <div class="col-md-12 featured">
                     <div class="Featured-Products-title">
@@ -139,7 +139,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
     </section>
     <!-- Featured Products block End  --> 
     
